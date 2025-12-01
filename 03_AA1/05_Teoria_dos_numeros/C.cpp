@@ -86,13 +86,13 @@ bool adora(ll &num, vi &v) {
 
 vi saida(vi &v) {
     ll s = 0;
-    vi vs(1e6);
+    vi vs((int) v.size());
     
-    for (ll l : v) {
-        if (!adora(l, v)) {
+    for (int i = 0 ; i < (int) v.size(); i++) {
+        if (!adora(v[i], v)) {
             s++;
         }
-        vs[l] = s;
+        vs[i] = s;
     }
 
     return vs;
@@ -107,7 +107,23 @@ int main() {
 
     while (t--) {
         cin >> n;
-        cout << vs[n] << "\n"; // 
+
+        ll i = 0;
+        ll f = v.size() - 1;
+        ll s = -1;
+
+        while (i <= f) {
+            ll mid = (i + f) / 2;
+
+            if (v[mid] <= n) {
+                s = mid;
+                i = mid + 1;
+            } else {
+                f = mid - 1;
+            }
+        }
+
+        cout << vs[s] << endl;
     }
 
     return 0;

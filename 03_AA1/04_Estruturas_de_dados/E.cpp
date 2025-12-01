@@ -1,9 +1,8 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-#define ll long long
-#define pb push_back
-#define vi  vector<ll>
+typedef long long ll;
+#define vi vector<ll>
 
 int main() {
     ios::sync_with_stdio(false);
@@ -11,15 +10,27 @@ int main() {
 
     ll n;
     cin >> n;
-
     vi v(n);
-    map<int, int> m;
-    for (int i = 0; i < n; i++) {
+    for (ll i = 0; i < n; i++) {
         cin >> v[i];
-        m[v[i]]++;
     }
 
+    vi s(n);
+    stack<ll> st; // guarda índices
 
+    for (ll i = 0; i < n; i++) {
+        
+        while(!(st.empty()) && v[st.top()] >= v[i]) {
+            st.pop();
+        }
 
-    return 0;
+        if (st.empty()) s[i] = 0;
+        else {s[i] = st.top() + 1;}
+
+        st.push(i);
+    }
+
+    for (ll i = 0; i < n; i++) {
+        cout << s[i] << " ";
+    }
 }
