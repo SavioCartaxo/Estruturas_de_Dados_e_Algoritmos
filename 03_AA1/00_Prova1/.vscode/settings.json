@@ -1,0 +1,6 @@
+{
+    "files.associations": {
+        "*.py": "java",
+        "iostream": "cpp"
+    }
+}
