@@ -9,7 +9,6 @@ using namespace std;
 
 vi crivo() {
     // Os números T- primos são os quadrados dos números primos
-
     vb prime(MAX + 1, true);
     prime[0] = prime[1] = false;
 

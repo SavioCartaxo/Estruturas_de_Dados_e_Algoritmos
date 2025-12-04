@@ -6,21 +6,19 @@ using namespace std;
 #define pb push_back
 
 const int MAX = 1'000'000;
-
 // Crivo linear que acha os primos até n
 vb crivo() {
-    vb primo(MAX+1, true);
-    primo[0] = primo[1] = false;
+    vb primos(MAX + 1, true);
+    primos[0] = primos[1] = false;
 
-    for (int i = 2; (1LL*i*i) <= MAX; i++) {
-        if (primo[i]) {
-            for (int j = i*i; j <= MAX; j+=i) {
-                primo[j] = false;
+    for (int j = 4; j <= MAX; j += 2) primos[j] = false;
+    for (int i = 3; (1LL*i*i) <= MAX; i+=2) {
+        if (primos[i]) {
+            for (int j = (1LL*i*i); j <= MAX; j+=2*i) {
+                primos[j] = false;
             }
         }
     }
-
-    return primo;
 }
 
 vi medo() {
@@ -73,7 +71,7 @@ int main() {
     int t, n;
     cin >> t;
 
-    vb vs = crivo();
+    vi vs = medo();
 
     while (t--) {
         cin >> n;

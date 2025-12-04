@@ -5,6 +5,7 @@ using namespace std;
 #define vb vector<bool>
 #define pb push_back
 
+
 vb crivo(int n) {
     vb is_prime(n + 1, true);
     is_prime[0] = is_prime[1] = false;

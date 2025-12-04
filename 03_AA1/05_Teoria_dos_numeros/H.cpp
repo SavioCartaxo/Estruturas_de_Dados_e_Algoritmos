@@ -10,9 +10,10 @@ vb crivo() {
     vb primo(MAX + 1, true);
     primo[0] = primo[1] = false;
 
-    for (ll i = 2; (1LL*i*i) <= MAX; i++) {
+    for (ll j = 4; j <= MAX; j += 2) primo[j] = false;
+    for (ll i = 3; (1LL*i*i) <= MAX; i+=2) {
         if (primo[i]) {
-            for (ll j = i*i; j <= MAX; j+=i) {
+            for (ll j = (1LL*i*i); j <= MAX; j+=2*i) {
                 primo[j] = false;
             }
         }
@@ -32,6 +33,19 @@ vb crivo() {
     return primo2;
 }
 
+bool is_prime(long long n) {
+    if (n < 2) return false;
+    if (n == 2 || n == 3) return true;
+    if (n % 2 == 0 || n % 3 == 0) return false;
+
+    for (long long i = 5; i * i <= n; i += 6) {
+        if (n % i == 0 || n % (i + 2) == 0)
+            return false;
+    }
+    return true;
+}
+
+
 int main() {
     ios::sync_with_stdio(false);
     cin.tie(nullptr);
@@ -42,11 +56,18 @@ int main() {
     ll s = 0;
     vb v = crivo();
 
-    for (int i = 2; i <= MAX; i++) {
+    if (is_prime(n)) {
+        cout << 1 << endl;
+        return 0;
+    }
+
+    for (ll i = 2; i <= MAX; i++) {
         if (v[i] && n % i == 0) {
+            ll m = n;
             n /= i;
             s++;
-            if (n == 1) break;
+            if (n == 1) 
+                break;
         }
     }
 
