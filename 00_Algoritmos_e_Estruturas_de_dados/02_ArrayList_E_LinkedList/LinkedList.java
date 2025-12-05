@@ -46,6 +46,7 @@ public class LinkedList {
         this.tail = newNode;
         this.size += 1;
     }
+    
     // addFirst(Aluno aluno)
     public void addFirst(String s) {
         Node newNode = new Node(s);
@@ -93,4 +94,29 @@ public class LinkedList {
         size += 1;
     }
      
+    public String get(int index) {
+        if (index < 0 || index >= this.size) {
+            throw new RuntimeException("deu ruim");
+        }
+
+        Node aux = this.head;
+        for (int i = 0; i < this.size - 1; i++) {
+            if (i == index) return aux.nome;
+            aux = aux.next;
+        }
+        return null;
+    }
+
+    public int indexOf(String s) {
+        Node aux = this.head;
+        for (int i = 0; i < this.size - 1; i++) {
+            if (aux.nome.equals(s)) return i;
+            aux = aux.next;
+        }
+        return -1;
+    }
+
+    public boolean contains(String s) {
+        return indexOf(s) != -1;
+    }
 }
