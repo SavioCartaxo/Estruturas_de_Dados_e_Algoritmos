@@ -71,6 +71,10 @@ int main() {
         }
     }
 
+    if (n > MAX) {
+        s++;
+    }
+
     cout << s << endl;
     
     return 0;
