@@ -1,4 +1,4 @@
-// 05/01/2026
+// 07/01/2026
 
 #include <bits/stdc++.h>
 using namespace std;
@@ -57,17 +57,14 @@ int main() {
     readll(a) readll(b) readll(c)
     readll(n)
 
-    rep(i, 1, a) {
-        if (n % i == 0) rep (j, 1, b) {
-            if (n % j == 0) rep (k, 1, c) {               
-                if (n % k == 0) if (i * j * k == n) {
-                    cout << i-1 << " " << j-1 << " " << k-1 << endl;
-                    return 0;
-                }
-            }
-        }        
-    }       
+    ll as = n / mdc(n, a);
+    ll bs = as / mdc(as, b);
+    ll cs = bs / mdc(bs, c);
 
-    print(-1)
+    if (cs != 1) 
+        print(-1)
+    else 
+        cout << mdc(n, a) - 1 << ' ' << mdc(as, b) - 1 << ' ' << mdc(bs, c) - 1 << endl;
+    
     return 0;
 }
