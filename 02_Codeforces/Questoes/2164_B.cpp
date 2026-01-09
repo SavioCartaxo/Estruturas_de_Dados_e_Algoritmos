@@ -1,51 +1,54 @@
-// 10/12/2025
+// 08/01/2026
 
 #include <bits/stdc++.h>
 using namespace std;
-
-#define ll long long
 
 int main() {
     ios::sync_with_stdio(false);
     cin.tie(nullptr);
 
-    ll t; cin >> t;
+    int t;
+    cin >> t;
 
-    ll n, a;
     while (t--) {
+        int n;
         cin >> n;
 
-        ll p1 = -1;
-        ll p2 = -1;
-        ll i1 = -1;
-        ll i2 = -1;
+        vector<long long> a(n);
+        for (int i = 0; i < n; i++) {
+            cin >> a[i];
+        }
 
-        for (int i = 0; i < n; i++){
-            cin >> a;
+        bool found = false;
 
-            if (a % 2 == 0) {
-                if (p1 == -1) {
-                    p1 = a;
-                } else if (p2 == -1) {
-                    p2 = a;        
-                }
-            } else {
-                if (i1 == -1) {
-                    i1 = a;
-                } else if (i2 == -1) {
-                    i2 = a;        
+        long long first_even = -1;
+        for (long long x : a) {
+            if (x % 2 == 0) {
+                if (first_even == -1) {
+                    first_even = x;
+                } else {
+                    cout << first_even << " " << x << "\n";
+                    found = true;
+                    break;
                 }
             }
         }
 
-        if (i1 != -1 && i2 != -1) {
-            cout << i1 << ' ' << i2 << "\n";
-        } else if (p1 != -1 && p2 != -1) {
-            cout << p1 << ' ' << p2 << "\n";
-        } else {
-            cout << -1 << "\n";
+        if (found) continue;
+
+        for (int i = 0; i < n && !found; i++) {
+            for (int j = i + 1; j < n; j++) {
+                if (a[j] % a[i] == 0) {
+                    cout << a[i] << " " << a[j] << "\n";
+                    found = true;
+                    break;
+                }
+            }
         }
 
+        if (!found) {
+            cout << -1 << "\n";
+        }
     }
 
     return 0;
