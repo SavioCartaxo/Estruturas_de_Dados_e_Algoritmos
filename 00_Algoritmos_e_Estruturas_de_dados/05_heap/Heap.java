@@ -2,11 +2,11 @@
 
 import java.util.*;
 
-public class Heap {
+class HEAP {
     private int[] heap;
     private int tail;
 
-    public Heap(int capacidade) {
+    public HEAP(int capacidade) {
         this.heap = new int[capacidade];
         this.tail = -1;
     }
@@ -48,19 +48,18 @@ public class Heap {
         this.tail++;
         this.heap[tail] = n;
 
-        cheacapai(this.tail);
+        heapify(this.tail);
     }
 
-    public void cheacapai(int index) {
+    public void heapify(int index) {
         if (index == 0) return;
 
         if (this.heap[parent(index)] < this.heap[index]) {
             int aux = this.heap[parent(index)];
             this.heap[parent(index)] = this.heap[index];
             this.heap[index] = aux;
-            cheacapai(parent(index));
+            heapify(parent(index));
         }
-
     }
 
     public int remove() {
