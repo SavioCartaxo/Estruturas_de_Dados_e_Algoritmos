@@ -1,7 +1,4 @@
 // Heap - Fila de prioridade
-
-import java.util.*;
-
 class HEAP {
     private int[] heap;
     private int tail;
