@@ -239,4 +239,43 @@ public class PV{
         else
             return avo.left;
     }
+
+    public boolean isPV() {
+        if (root == null) return true;
+        if (root.color == 1) return false;
+
+        return validHeight(root) && checkColors(root);
+    }
+
+    public boolean validHeight(Node n) {
+        if (n == null) return true;
+        if (blackHeight(n.left) != blackHeight(n.right)) return false;
+        return validHeight(n.left) && validHeight(n.right);
+    }
+
+    public int blackHeight(Node n) {
+        if (n == null) return 1;
+        if (n.color == 1) return blackHeight(n.left);
+        return 1 + blackHeight(n.left);
+    }
+
+    public boolean checkColors(Node n) {
+        if (n == null) return true;
+        
+        boolean esquerdaNull = n.left == null;
+        boolean direitaNull = n.right == null;
+        
+        if (esquerdaNull && direitaNull)
+            return true;
+
+        if (esquerdaNull)
+            if (n.right.color == 1)
+                return false;
+        
+        if (direitaNull)
+            if (n.left.color == 1)
+                return false;
+        
+        return checkColors(n.left) && checkColors(n.right);
+    }
 }

@@ -135,4 +135,21 @@ public class AVL {
 
         return l - r;
     }
+
+    public boolean isAVL() {
+        return isAVL(root);
+    }
+
+    public boolean isAVL(Node n) {
+        if (n == null)
+            return true;
+
+        int HL = (n.left == null) ? -1 : n.left.height();
+        int HR = (n.right == null) ? -1 : n.right.height();
+
+        if (Math.abs(HL - HR) > 1)
+            return false;
+
+        return isAVL(n.left) && isAVL(n.right);
+    }
 }
