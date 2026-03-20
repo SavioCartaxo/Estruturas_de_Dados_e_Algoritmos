@@ -1,1 +1,0 @@
-{"name":"Local: 2203","url":"c:\\Users\\savio\\OneDrive\\Documentos\\Code\\Estudos_CPP\\Beecrownd\\2203.cpp","tests":[{"id":1755741075296,"input":"4 6 22 6 0 16 2\n\n4 6 22 6 1 16 2","output":"Y\nN"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"c:\\Users\\savio\\OneDrive\\Documentos\\Code\\Estudos_CPP\\Beecrownd\\2203.cpp","group":"local","local":true}
