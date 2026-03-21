@@ -24,6 +24,29 @@ using namespace std;
 #define NO cout << "NO" << endl;
 
 int main() {
-    print("Funcionou")
+    readll(n)
+
+    if (n < 2) {
+        return 0;
+    }
+
+    vector<bool> vb(n+1, true);
+
+    vb[0] = vb[1] = false;
+    
+    for (int i = 2; i <= n; i++) {
+        if (vb[i]) {
+            ll aux = 2*i;
+            while (aux <= n) {
+                vb[aux] = false;
+                aux += i;
+            }
+        }
+    }
+
+    rep (i, 0, n+1) {
+        if (vb[i]) cout << i << ' ';
+    }
+
     return 0;
 }

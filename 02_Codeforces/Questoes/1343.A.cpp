@@ -24,6 +24,32 @@ using namespace std;
 #define NO cout << "NO" << endl;
 
 int main() {
-    print("Funcionou")
+    readint(t)
+
+    vl v;
+
+    ll aux = 1;
+    ll soma = 0;
+    while (aux <= 10e9) {
+        soma += aux;
+        aux *= 2;
+        v.pb(soma);
+    }
+
+    while (t--) {
+        readll(n)
+
+        int i = 1;
+        int ans = 1;
+        while (i < (int) v.size()) {
+            if (n % v[i] == 0) {
+                ans = n / v[i];
+                break;
+            }
+            i++;
+        }
+
+        print(ans)
+    }
     return 0;
 }

@@ -24,6 +24,20 @@ using namespace std;
 #define NO cout << "NO" << endl;
 
 int main() {
-    print("Funcionou")
+    readll(n)
+    vl v;
+
+    for (int i = 1; i*i <= n; i++) {
+        if (n % i == 0) {
+            v.pb(i);
+            if (i != n / i) 
+                v.pb(n/i);
+        }
+    }
+
+    rep(i, 0, (int) v.size()) {
+        print(v[i])
+    }
+
     return 0;
 }

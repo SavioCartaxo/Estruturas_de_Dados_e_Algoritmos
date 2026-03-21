@@ -24,6 +24,18 @@ using namespace std;
 #define NO cout << "NO" << endl;
 
 int main() {
-    print("Funcionou")
+    readll(n)
+
+    bool eh_primo = true;
+    for (int i = 2; i*i <= n; i++) {
+        if (n % i == 0)
+            eh_primo = false;
+    }
+
+    if (eh_primo && n != 1)
+        YES
+    else
+        NO
+
     return 0;
 }
