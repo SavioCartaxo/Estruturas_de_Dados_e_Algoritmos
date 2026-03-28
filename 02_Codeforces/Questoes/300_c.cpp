@@ -43,23 +43,22 @@ ll fact(ll n) {
     return saida;
 }
 
-ll pequenoTeoremaDeFermat(ll base) {
-    ll saida = 1;
-    rep (i, 1, MOD - 1) {
-        saida = (saida * base) % MOD;
-    }
-    return saida;
-}
-
 ll power(ll base, ll exp) {
     ll result = 1;
     base %= MOD;
+
     while (exp > 0) {
-        if (exp % 2 == 1) result = result * base % MOD;
+        if (exp & 1) { 
+            result = result * base % MOD;
+        }
         base = base * base % MOD;
         exp /= 2;
     }
-    return result;
+    return result % MOD;
+}
+
+ll inv(ll a) {
+    return power(a, MOD - 2); 
 }
 
 int main() {
@@ -68,7 +67,7 @@ int main() {
     ll saida = 0;
     rep (i, 0, n+1) {
         if (ehFirmeza(a * (n-i) + b * i, a, b)) {
-            saida += fact(n) * pequenoTeoremaDeFermat(fact(n-1) * fact(i));
+            saida = (saida + ((fact(n) * inv(fact(n-i))) % MOD * inv(fact(i)) % MOD)) % MOD;
         }
     }
 

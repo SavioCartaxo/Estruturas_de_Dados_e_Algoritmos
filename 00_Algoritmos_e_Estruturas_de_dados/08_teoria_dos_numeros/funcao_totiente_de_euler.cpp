@@ -23,18 +23,22 @@ using namespace std;
 #define YES cout << "YES" << endl;
 #define NO cout << "NO" << endl;
 
-ll mdc(ll a, ll b) {
-    if (a < b) swap(a,b);
-
-    while (b != 0) {
-        ll aux = a;
-        a = b;
-        b = aux % b;
+ll tot(ll n) {
+    ll ret = n;
+    for (ll p = 2; p*p <= n; p++) {
+        if (n % p == 0) {
+            while (n % p == 0) {
+                n /= p;
+            }
+            ret -= ret / p;
+        }
     }
 
-    return a;
+    if (n > 1) ret-= ret / n;
+    return ret;
 }
 
 int main() {
+    
     return 0;
 }
