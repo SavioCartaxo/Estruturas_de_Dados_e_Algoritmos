@@ -23,30 +23,18 @@ using namespace std;
 #define YES cout << "YES" << endl;
 #define NO cout << "NO" << endl;
 
+ll mdc(ll a, ll b) {
+    if (a < b) swap(a,b);
+
+    while (b != 0) {
+        ll aux = a;
+        a = b;
+        b = aux % b;
+    }
+
+    return a;
+}
+
 int main() {
-    readll(n)
-
-    if (n < 2) {
-        return 0;
-    }
-
-    vector<bool> vb(n+1, true);
-
-    vb[0] = vb[1] = false;
-    
-    for (int i = 2; i*i <= n; i++) {
-        if (vb[i]) {
-            ll aux = 2*i;
-            while (aux <= n) {
-                vb[aux] = false;
-                aux += i;
-            }
-        }
-    }
-
-    rep (i, 0, n+1) {
-        if (vb[i]) cout << i << ' ';
-    }
-
     return 0;
 }
