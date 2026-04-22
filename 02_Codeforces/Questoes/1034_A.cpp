@@ -35,34 +35,71 @@ ll gcd(ll a, ll b) {
     return a;
 }
 
+#define MAX 15000000
+vector<int> crivo() {
+    vector<int> v = {2};
+    vector<bool> vb(MAX+1, true);
+
+    vb[0] = vb[1] = false;
+
+    for (int i = 3; i*i <= MAX; i+=2) {
+        if (vb[i]) {
+            int aux = i*2;
+            while (aux <= MAX) {
+                vb[aux] = false;
+                aux += i;
+            }
+        }
+    }
+
+    for (int i = 3; i <= MAX; i+=2) {
+        if (vb[i]) v.pb(i);
+    }
+
+    return v;
+}
+
 int main() {
     ll n; cin >> n;
     vl v(n);
 
-    ll mdc;
-    for (ll i = 0; i < n; i++) {
-        cin >> v[i];
-        if (i == 0) 
-            mdc = v[0];
-        else 
-            mdc = gcd(mdc, v[i]);
+    ll mdc = 0;
+
+    for (auto &i : v) {
+        cin >> i;
+        mdc = gcd(mdc, i);
     }
 
-    for (ll i = 0; i < n; i++) {
-        v[i] = v[i] / mdc;
-    }
+    for (auto &i : v) i /= mdc;
 
-    ll saida = 0;
-    for (ll i = 0; i < n; i++) {
-        if (v[i] <= mdc) {
-            saida ++;
+    map<ll,ll> m;
+    auto p = crivo();
+
+    for (auto &i : v) {
+        int j = 0;
+        while(p[j] <= i) {
+            ll aux = p[j];
+            if (i % aux == 0) 
+                m[aux]++;
+            
+            while (i % aux == 0) {
+                i /= aux;
+            }
+            j++;
         }
     }
 
-    if (saida == n || saida == 0) {
-        print(-1)
-    } else 
-        print(saida)
+    ll maior = 0;
+    for (auto &[key, value] : m) {
+        maior = max(maior, value);
+    }
+
+    ll saida = n - maior;
+
+    if (maior == 0)
+        saida = -1;
+
+    print(saida)
 
     return 0;
 }
