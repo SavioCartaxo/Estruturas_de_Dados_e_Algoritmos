@@ -4,6 +4,8 @@ using namespace std;
 #define ll long long
 #define vl vector<ll>
 #define vll vector<vl>
+#define vi vector<int>
+#define vii vector<vi>
 
 #define readll(x) ll x; cin >> x;
 #define readint(x) int x; cin >> x;
