@@ -25,8 +25,28 @@ using namespace std;
 #define YES cout << "YES" << endl;
 #define NO cout << "NO" << endl;
 
+ll gcd(ll a, ll b) {
+    if (a < b) swap(a, b);
+
+    while (b != 0) {
+        ll aux = a;
+        a = b;
+        b = aux % b;
+    }
+
+    return a;
+}
+
 int main() {
-    cin.tie(0)->sync_with_stdio(0);
+    ll y, k; cin >> y >> k;
+    ll x = 1;
     
+    while (k--) {
+        x += gcd(x, y);
+    }
+
+    print(x)
     return 0;
 }
+
+// Salvio ou Sarvio?

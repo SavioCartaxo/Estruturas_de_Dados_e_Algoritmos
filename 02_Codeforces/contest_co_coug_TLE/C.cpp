@@ -26,7 +26,8 @@ using namespace std;
 #define NO cout << "NO" << endl;
 
 int main() {
-    cin.tie(0)->sync_with_stdio(0);
-    
+    print("Funcionou")
     return 0;
 }
+
+// Salvio ou Sarvio?
