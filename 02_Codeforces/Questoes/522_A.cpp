@@ -24,6 +24,25 @@ using namespace std;
 
 int main() {
     cin.tie(0)->sync_with_stdio(0);
+
+    readint(n)
+    map< string, int> deep;
+    deep["polycarp"]++;
+
+    while (n--) {
+        string filho, _, pai; cin >> filho >> _ >> pai;
+        
+        transform(pai.begin(), pai.end(), pai.begin(), ::tolower);
+        transform(filho.begin(),filho.end(), filho.begin(), ::tolower);
+
+        deep[filho] = deep[pai] + 1;
+    }
+
+    ll ans = 0;
+    for (auto [name, d] : deep) 
+        ans = max(ans, (ll)d);
     
+    print(ans)
+
     return 0;
 }

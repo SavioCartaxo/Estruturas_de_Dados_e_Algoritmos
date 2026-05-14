@@ -1,81 +1,49 @@
-// Enunciado:
-// Você tem um grafo não direcionado com n vértices (0 a n-1) e m arestas.
-// Seu objetivo é:
-
-// Determinar quantas componentes conexas existem no grafo.
-
-// Imprimir os vértices que pertencem a cada componente (em ordem crescente).
-
 #include <bits/stdc++.h>
 using namespace std;
-using vi = vector<int>;
-using vii = vector<vi>;
 
-vii m;
-vector<bool> visitado;
-vii conexos;
+#define vi vector<int>
+#define vii vector<vi>
 
-vector<int> dfs(int comeco, vector<int> conexoes) {
-    visitado[comeco] = true;
-    conexoes.push_back(comeco);
+// DFS base
+vector<bool> visitados;
+vii grafo;
+void recursive_dfs(int raiz) {
+    visitados[raiz] = true;
 
-    for (int v : m[comeco]){
-        if (!visitado[v]) {
-            conexoes = dfs(v, conexoes);
+    for (auto vizinho : grafo[raiz]) {
+        if (!visitados[vizinho]) {
+            recursive_dfs(vizinho);
         }
     }
+}
 
-    return conexoes;
+void inline_dfs() {
+    // Lista de vizitados já está criada
+    // Grafo já está definido
+
+    stack<int> pilha;
+
+    for (int i = 0; i < (int) grafo.size(); i++) {
+        if (visitados[i])
+            continue;
+
+        visitados[i] = true;
+        pilha.push(i);
+
+        while (!pilha.empty()) {
+            auto aux = pilha.top();
+            pilha.pop();
+            
+            for (auto vizinho : grafo[aux]) {
+                if (!visitados[vizinho]) {
+                    pilha.push(vizinho);
+                    visitados[vizinho] = true;    
+                }
+            }
+        }
+    }
 }
 
 int main() {
-
-    int n, g;
-    cin >> n >> g;
-
-    m.resize(n);
-    visitado.assign(n, false);
-    
-    int a, b;
-    for (int i = 0; i < g; i++) {
-        cin >> a >> b;
-
-        m[a].push_back(b);
-        m[b].push_back(a);
-    }
-
-    int contador = 0;
-    
-    for (int i = 0; i < n; i++) {
-        if (!(visitado[i])) {
-
-            visitado[i] = true;
-            
-            vector<int> linha = {i};
-
-            for (int j : m[i]) {
-                linha = dfs(j, linha);
-            }
-
-            conexos.push_back(linha);
-            contador++;
-        }
-    }
-
-    cout << contador << endl;
-
-    for (int i = 0; i < contador; i++) {
-        
-        for (int j = 0; j < (int) conexos[i].size(); j++) {
-            cout << conexos[i][j];
-
-            if (j < (int) conexos[i].size() - 1)
-                cout << " - ";
-    
-        }
-        
-        cout << endl;
-    }
-
     return 0;
 }
