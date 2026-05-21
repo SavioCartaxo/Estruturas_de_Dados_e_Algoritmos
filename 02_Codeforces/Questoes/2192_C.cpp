@@ -45,14 +45,12 @@ ll solved() {
     vl v(n+1);
     ll ciclo = 0;
     set<ll> valores;
-    map<ll, ll> m; // valor : posicao
     vl sum(n+1);
     sum[0] = 0;
     rep (i ,1 , n+1) {
         cin >> v[i];
         ciclo += v[i];
         valores.insert(v[i]);
-        m[v[i]] = i;
 
         sum[i] = v[i];
         if (i != 1) {
@@ -62,6 +60,10 @@ ll solved() {
 
     ll out = 0;
 
+    if (v[1] >= h) {
+        return 1;
+    }
+
     // Tempos de recarga
     if (h % ciclo == 0) { 
         out += max(k * (h / ciclo - 1), 0LL);
@@ -70,7 +72,7 @@ ll solved() {
     }
 
     // as balas de cada ciclo fechado
-    out += (h / ciclo) * ciclo; 
+    out += n * (h / ciclo); 
 
     h = h % ciclo;
     if (h == 0) {
@@ -81,9 +83,16 @@ ll solved() {
     rep (i, 1, n+1) {
         ll soma_atual = sum[i-1];
         ll numero_buscaso = h - soma_atual;
-        
-        if (valores.count(numero_buscaso) && m[numero_buscaso] <= i) {
-            swap(v[i], v[m[numero_buscaso]]);
+
+        int pos = -1;
+        rep(j, i, n+1) {
+            if (v[j] >= numero_buscaso) {
+                pos = j;
+                break;
+            }
+        }
+
+        if (pos != -1 && pos >= i) {
             out += i;
             return out;
         }

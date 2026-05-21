@@ -21,8 +21,22 @@ using namespace std;
 #define YES cout << "YES" << endl;
 #define NO cout << "NO" << endl;
 
+int n, k;
+
+void solved() {
+    cin >> n >> k;
+    ll pontes = n*(n-1)/2;
+    
+    if (k >= n - 1) {
+        print(1);
+    } else {
+        print(n);
+    }
+}
+
 int main() {
     cin.tie(0)->sync_with_stdio(0);
-    
+    int t; cin >> t;
+    while (t--) solved();
     return 0;
 }

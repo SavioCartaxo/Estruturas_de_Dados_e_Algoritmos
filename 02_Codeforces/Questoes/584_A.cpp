@@ -20,9 +20,21 @@ using namespace std;
 
 #define YES cout << "YES" << endl;
 #define NO cout << "NO" << endl;
-
+ 
 int main() {
-    cin.tie(0)->sync_with_stdio(0);
-    
+    string t; int n; cin >> n >> t;
+
+    if (sz(t) > n) {
+        print(-1)
+        return 0;
+    }
+
+    cout << t;
+    for (int i = 0; i < n - sz(t); i++) {
+        cout << '0';
+    }
+
+    cout << endl;
+
     return 0;
 }
