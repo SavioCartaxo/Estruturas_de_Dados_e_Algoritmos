@@ -1,116 +1,67 @@
 #include <bits/stdc++.h>
 using namespace std;
- 
+
 #define ll long long
 #define vl vector<ll>
 #define vll vector<vl>
 #define vi vector<int>
 #define vii vector<vi>
- 
+
 #define readll(x) ll x; cin >> x;
 #define readint(x) int x; cin >> x;
 #define reads(x) string x; cin >> x;
-#define readc(x) char x; cin >> x;
- 
+
 #define endl "\n"
 #define pb push_back
- 
+#define sz(x) (int)x.size()
 #define rep(i,a,b) for (int i = a; i < b; i++)
-#define rep4(i,a,b,c) for (int i = a; i < b; i+=c)
-#define repneg(i,a,b) for (int i = a; i > b; i--)
-#define repneg4(i,a,b,c) for (int i = a; i > b; i-=c)
- 
+
 #define print(x) cout << x << endl;
- 
+
 #define YES cout << "YES" << endl;
 #define NO cout << "NO" << endl;
- 
-void printv(vi v) {
-    
-    rep (i, 0, (int)v.size()) {
-        
-        cout << v[i];
-        if (i != (int)v.size() - 1) {
-            cout << ' ';
-        }
 
-    }
-
-    cout << endl;
-}
- 
 ll solved() {
-    ll n, h, k; cin >> n >> h >> k;
+    ll n, h, k;
+    cin >> n >> h >> k;
 
     vl v(n+1);
     ll ciclo = 0;
-    set<ll> valores;
-    vl sum(n+1);
-    sum[0] = 0;
-    rep (i ,1 , n+1) {
+
+    rep(i,1,n+1) {
         cin >> v[i];
         ciclo += v[i];
-        valores.insert(v[i]);
+    }
 
-        sum[i] = v[i];
-        if (i != 1) {
-            sum[i] = sum[i] + sum[i-1];
+    ll ciclos_usados = (h-1) / ciclo;
+    ll out = ciclos_usados * (n + k);
+    h -= ciclos_usados * ciclo;
+
+    vl suf(n+2, 0);
+    for (int i = n; i >= 1; i--) {
+        suf[i] = max(suf[i+1], v[i]);
+    }
+
+    ll menor = 1e9;
+    ll soma = 0;
+    rep(i,1,n+1) {
+        menor = min(menor, v[i]);
+        soma += v[i];
+
+        ll melhor = soma;
+        ll Max = suf[i+1];
+        if (Max > menor) {
+            melhor = soma - menor + Max;
+        }
+
+        if (melhor >= h) {
+            return out + i;
         }
     }
 
-    ll out = 0;
-
-    if (v[1] >= h) {
-        return 1;
-    }
-
-    // Tempos de recarga
-    if (h % ciclo == 0) { 
-        out += max(k * (h / ciclo - 1), 0LL);
-    } else {
-        out += k * (h / ciclo);
-    }
-
-    // as balas de cada ciclo fechado
-    out += n * (h / ciclo); 
-
-    h = h % ciclo;
-    if (h == 0) {
-        return out;
-    }
-    
-    // faz a troca
-    rep (i, 1, n+1) {
-        ll soma_atual = sum[i-1];
-        ll numero_buscaso = h - soma_atual;
-
-        int pos = -1;
-        rep(j, i, n+1) {
-            if (v[j] >= numero_buscaso) {
-                pos = j;
-                break;
-            }
-        }
-
-        if (pos != -1 && pos >= i) {
-            out += i;
-            return out;
-        }
-    }
-
-    // não fez troca
-    rep (i, 1, n+1) {
-        h -= v[i];
-        out++;
-
-        if (h <= 0) {
-            break;
-        }
-    }
-
-    return out;
+    return -1;
 }
- 
+
 int main() {
     readint(t)
     while (t--) {
