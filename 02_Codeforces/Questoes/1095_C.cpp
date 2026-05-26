@@ -31,14 +31,21 @@ int binpow(int a, int b) {
     return out;
 }
 
-void printv(vi &v) {
-    rep (i, 0, sz(v)) {
-        cout << v[i];
-        if (i != sz(v) - 1) {
+void printv(priority_queue<int> v) {
+    while (!v.empty()) {
+        cout << v.top();
+        v.pop();
+
+        if (!v.empty()) {
             cout << ' ';
         }
     }
-    print("")
+    cout << endl;
+}
+
+ll maior_base(ll n) {
+    ll mb = 63 - __builtin_clzll(n);
+    return binpow(2, mb);
 }
 
 void solved() {
@@ -56,35 +63,27 @@ void solved() {
         return;
     }
 
-    if ((k - numero_minimo) & 1) {
-        NO
-        return;
-    }
-
     YES
 
-    vi bits;
+    priority_queue<int> pq;
     for (int i = 31; i >= 0; i--) {
         if (n & (1 << i)) {
-            bits.pb(binpow(2,i));
+            pq.push(binpow(2,i));
         }
     }
 
     int pode_dividir = 0;
     k = k - numero_minimo;
-    
-    while (k--) {
-        while (bits[pode_dividir] == 1) {
-            pode_dividir++;
-        }
 
-        int numero = bits[pode_dividir];
-        bits.erase(bits.begin() + pode_dividir);
-        bits.pb(numero / 2);
-        bits.pb(numero / 2);
+    while (k--) {
+        int numero = pq.top();
+        pq.pop();
+
+        pq.push(numero / 2);
+        pq.push(numero / 2);
     }
 
-    printv(bits);
+    printv(pq);
 }
 
 int main() {
@@ -92,5 +91,3 @@ int main() {
     solved();
     return 0;
 }
-
-//__builtin_popcountll
